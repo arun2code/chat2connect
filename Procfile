@@ -1,0 +1,1 @@
+chatbot: ./gradlew run
