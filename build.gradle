@@ -1,0 +1,12 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'net.weibeld.qsense.chatbot.Chatbot'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.ullink.slack:simpleslackapi:1.2.0'
+}
