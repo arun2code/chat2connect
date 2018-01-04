@@ -8,18 +8,17 @@ import com.ullink.slack.simpleslackapi.listeners.SlackMessagePostedListener;
 
 public class Chatbot {
 
-    private static String mBotName;
-    private static String mAuthToken;
-    private static String mChannelName;
+    private static final String BOT_NAME = "quanty";
+    private static final String AUTH_TOKEN = System.getenv("AUTH_TOKEN");
+    private static final String CHANNEL_NAME = "general";
+
     private static String mBotId;
     private static SlackSession mSession;
 
     public static void main(String[] args) {
-        loadConfig();
         connect();
         mSession.addMessagePostedListener((SlackMessagePosted e, SlackSession s) -> {
-            if (e.getChannel().getName().equals(mChannelName) && e.getMessageContent().contains(mBotId)) {
-                //String msg = evt.getMessageContent();
+            if (e.getChannel().getName().equals(CHANNEL_NAME) && e.getMessageContent().contains(mBotId)) {
                 sayHello(e, s);
             }
         });
@@ -30,21 +29,13 @@ public class Chatbot {
     }
 
     private static void connect() {
-        mSession = SlackSessionFactory.createWebSocketSlackSession(mAuthToken);
+        mSession = SlackSessionFactory.createWebSocketSlackSession(AUTH_TOKEN);
         try {
             mSession.connect();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        mBotId = "<@" + mSession.findUserByUserName(mBotName).getId() + ">";
+        mBotId = "<@" + mSession.findUserByUserName(BOT_NAME).getId() + ">";
     }
 
-    private static void loadConfig() {
-        //botName = p.getProperty("botName");
-        //authToken = p.getProperty("authToken");
-        //channelName = p.getProperty("channelName");
-        mBotName = "quanty";
-        mAuthToken = "xoxb-280947785975-kZzzNnhqeZjppmzdRxQ6MKGV";
-        mChannelName = "general";
-    }
 }
