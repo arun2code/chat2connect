@@ -10,3 +10,6 @@ repositories {
 dependencies {
     compile 'com.ullink.slack:simpleslackapi:1.2.0'
 }
+
+// The "stage" task is run automatically by Heroku for building the app
+task stage(dependsOn: 'build')
