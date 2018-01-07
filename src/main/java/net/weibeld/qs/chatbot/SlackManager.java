@@ -11,7 +11,7 @@ class SlackManager {
 
     private static SlackManager instance = null;
 
-    private final String AUTH_TOKEN = System.getenv("AUTH_TOKEN");
+    private final String AUTH_TOKEN = System.getenv("SLACK_AUTH_TOKEN");
     private final String CHANNEL_NAME = "general";
     private final String BOT_NAME = "quanty";
 
